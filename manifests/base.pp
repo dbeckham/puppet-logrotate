@@ -38,6 +38,14 @@ class logrotate::base {
     'SuSE': {
       include logrotate::defaults::suse
     }
-    default: { }
+    default: {
+      case $::operatingsystem {
+        # to work around Gentoo facter <= 1.6.x bug
+        'Gentoo': {
+          include logrotate::defaults::gentoo
+        }
+        default: { }
+      }
+    }
   }
 }
