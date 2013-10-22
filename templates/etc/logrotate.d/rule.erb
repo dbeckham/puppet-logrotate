@@ -35,7 +35,8 @@
     '_mail', '_missingok', '_olddir', '_sharedscripts', '_ifempty', '_maillast',
     '_mailfirst', '_shred', '_rotate_every'
   ].each do |bool|
-    opts << scope.to_hash[bool] if scope.to_hash.has_key?(bool)
+    value = scope.to_hash[bool]
+    opts << scope.to_hash[bool] if value != 'undef'
   end
 
   [

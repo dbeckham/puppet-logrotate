@@ -177,7 +177,7 @@ define logrotate::rule(
   }
 
   case $compress {
-    'undef': {}
+    'undef': { $_compress = 'undef' }
     true: { $_compress = 'compress' }
     false: { $_compress = 'nocompress' }
     default: {
@@ -186,7 +186,7 @@ define logrotate::rule(
   }
 
   case $copy {
-    'undef': {}
+    'undef': { $_copy = 'undef' }
     true: { $_copy = 'copy' }
     false: { $_copy = 'nocopy' }
     default: {
@@ -195,7 +195,7 @@ define logrotate::rule(
   }
 
   case $copytruncate {
-    'undef': {}
+    'undef': { $_copytruncate = 'undef' }
     true: { $_copytruncate = 'copytruncate' }
     false: { $_copytruncate = 'nocopytruncate' }
     default: {
@@ -204,7 +204,7 @@ define logrotate::rule(
   }
 
   case $create {
-    'undef': {}
+    'undef': { $_create = 'undef' }
     true: { $_create = 'create' }
     false: { $_create = 'nocreate' }
     default: {
@@ -213,7 +213,7 @@ define logrotate::rule(
   }
 
   case $delaycompress {
-    'undef': {}
+    'undef': { $_delaycompress = 'undef' }
     true: { $_delaycompress = 'delaycompress' }
     false: { $_delaycompress = 'nodelaycompress' }
     default: {
@@ -222,7 +222,7 @@ define logrotate::rule(
   }
 
   case $dateext {
-    'undef': {}
+    'undef': { $_dateext = 'undef' }
     true: { $_dateext = 'dateext' }
     false: { $_dateext = 'nodateext' }
     default: {
@@ -231,7 +231,7 @@ define logrotate::rule(
   }
 
   case $mail {
-    'undef': {}
+    'undef': { $_mail = 'undef' }
     false: { $_mail = 'nomail' }
     default: {
       $_mail = "mail ${mail}"
@@ -239,7 +239,7 @@ define logrotate::rule(
   }
 
   case $missingok {
-    'undef': {}
+    'undef': { $_missingok = 'undef' }
     true: { $_missingok = 'missingok' }
     false: { $_missingok = 'nomissingok' }
     default: {
@@ -248,7 +248,7 @@ define logrotate::rule(
   }
 
   case $olddir {
-    'undef': {}
+    'undef': { $_olddir = 'undef' }
     false: { $_olddir = 'noolddir' }
     default: {
       $_olddir = "olddir ${olddir}"
@@ -256,7 +256,7 @@ define logrotate::rule(
   }
 
   case $sharedscripts {
-    'undef': {}
+    'undef': { $_sharedscripts = 'undef' }
     true: { $_sharedscripts = 'sharedscripts' }
     false: { $_sharedscripts = 'nosharedscripts' }
     default: {
@@ -265,7 +265,7 @@ define logrotate::rule(
   }
 
   case $shred {
-    'undef': {}
+    'undef': { $_shred = 'undef' }
     true: { $_shred = 'shred' }
     false: { $_shred = 'noshred' }
     default: {
@@ -274,7 +274,7 @@ define logrotate::rule(
   }
 
   case $ifempty {
-    'undef': {}
+    'undef': { $_ifempty = 'undef' }
     true: { $_ifempty = 'ifempty' }
     false: { $_ifempty = 'notifempty' }
     default: {
@@ -283,7 +283,7 @@ define logrotate::rule(
   }
 
   case $rotate_every {
-    'undef': {}
+    'undef': { $_rotate_every = 'undef' }
     'hour', 'hourly': {}
     'day': { $_rotate_every = 'daily' }
     'week': { $_rotate_every = 'weekly' }
@@ -344,7 +344,7 @@ define logrotate::rule(
   }
 
   case $su {
-    'undef',false: {}
+    'undef',false: { $_su = 'undef' }
     true: { $_su = 'su' }
     default: {
       fail("Logrotate::Rule[${name}]: su must be a boolean")
@@ -352,7 +352,7 @@ define logrotate::rule(
   }
 
   case $mailfirst {
-    'undef',false: {}
+    'undef',false: { $_mailfirst = 'undef' }
     true: {
       if $maillast == true {
         fail("Logrotate::Rule[${name}]: Can't set both mailfirst and maillast")
@@ -366,7 +366,7 @@ define logrotate::rule(
   }
 
   case $maillast {
-    'undef',false: {}
+    'undef',false: { $_maillast = 'undef' }
     true: {
       $_maillast = 'maillast'
     }
