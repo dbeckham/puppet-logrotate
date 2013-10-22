@@ -15,7 +15,7 @@
       opts << [@_create, @create_mode, @create_owner, @create_group].reject { |r|
         r == 'undef'
       }.join(' ')
-    else
+    elsif @_create != 'undef'
       opts << @_create
     end
   end
