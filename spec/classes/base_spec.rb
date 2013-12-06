@@ -52,6 +52,6 @@ describe 'logrotate::base' do
   context 'on Gentoo' do
     let(:facts) { {:operatingsystem => 'Gentoo'} }
 
-    it { should include_class('logrotate::defaults::gentoo') }
+    it { should contain_class('logrotate::defaults::gentoo') }
   end
 end
