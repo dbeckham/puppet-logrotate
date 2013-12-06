@@ -1,3 +1,6 @@
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE
+# OVERWRITTEN.
+
 <%
   opts = []
 
@@ -14,6 +17,16 @@
       }.join(' ')
     else
       opts << @_create
+    end
+  end
+
+  if scope.to_hash.has_key?('_su')
+    if @_su == 'su'
+      opts << [@_su, @su_owner, @su_group].reject { |r|
+        r == 'undef'
+      }.join(' ')
+    else
+      opts << @_su
     end
   end
 
@@ -35,7 +48,7 @@
   end
 -%>
 <%= rpath %> {
-<% opts.each do |opt| -%>
+<% opts.sort_by{|key,value| key}.each do |opt| -%>
   <%= opt %>
 <% end -%>
 <% if @postrotate != 'undef' -%>
