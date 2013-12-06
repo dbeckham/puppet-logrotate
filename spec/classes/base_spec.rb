@@ -9,7 +9,6 @@ describe 'logrotate::base' do
       'owner'   => 'root',
       'group'   => 'root',
       'mode'    => '0444',
-      'source'  => 'puppet:///modules/logrotate/etc/logrotate.conf',
       'require' => 'Package[logrotate]',
     })
 
@@ -29,6 +28,18 @@ describe 'logrotate::base' do
       'source'  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
       'require' => 'Package[logrotate]',
     })
+  end
+
+  context 'for logrotate.conf source selection' do
+    let(:facts) { {:osfamily => 'Debian', :operatingsystem => 'Ubuntu'} }
+
+    it do
+      should contain_file('/etc/logrotate.conf').with_source([
+        'puppet:///modules/logrotate/etc/logrotate.conf.Ubuntu',
+        'puppet:///modules/logrotate/etc/logrotate.conf.Debian',
+        'puppet:///modules/logrotate/etc/logrotate.conf',
+      ])
+    end
   end
 
   context 'on Debian' do

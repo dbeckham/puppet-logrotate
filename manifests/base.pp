@@ -18,7 +18,11 @@ class logrotate::base {
     '/etc/logrotate.conf':
       ensure  => file,
       mode    => '0444',
-      source  => 'puppet:///modules/logrotate/etc/logrotate.conf';
+      source  => [
+          "puppet:///modules/logrotate/etc/logrotate.conf.${::operatingsystem}",
+          "puppet:///modules/logrotate/etc/logrotate.conf.${::osfamily}",
+          'puppet:///modules/logrotate/etc/logrotate.conf',
+      ];
     '/etc/logrotate.d':
       ensure  => directory,
       mode    => '0755';
